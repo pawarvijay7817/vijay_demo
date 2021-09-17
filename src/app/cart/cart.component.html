@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-md-3"> </div>
+  <div class="col-md-6">
+    <div class="card row">
+      <div class="card-header">
+        <div class="row w-100">
+            <div class="col-md-6">
+              <h3>My Cart</h3>
+            </div>
+            <div class="col-md-6 text-left" style="text-align: left;">
+              <a routerLink="/products">Products</a>
+                &nbsp;&nbsp; Cart Items({{cartCount}})
+                <button (click)="clearCart()" class="btn btn-sm btn-danger" >Clear Cart</button>
+            </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="col-md-12 text-right" style="text-align: right;">
+            
+        </div>
+        <div class="col-md-12 m-1"  style="border:1px solid gray; border-radious:5px;" *ngFor="let product of cartList; let i=index;">
+          <div class="row">
+            <div class="col-md-3">
+              <img src="../../assets/no-image.jpg" style="width: 80%;">
+            </div>
+            <div class="col-md-6">
+              <p><strong>{{product.name}}</strong> </p>
+              <label>Price : Rs. {{product.price}} </label>
+            </div>
+            <div class="col-md-3">
+              <button (click)="removeItem(product.id)" class="btn btn-sm btn-warning m-1" ><strong>-</strong></button>
+              <input type="text" [value]="product.item" style="height: 35px; width:50px; border-radius: 4px;">  
+              <button (click)="addItem(product.id)" class="btn btn-sm btn-primary m-1" ><strong>+</strong></button>
+               Total : Rs.<b>{{product.price * product.item}}</b>
+               <br>
+               <a (click)="removeProduct(product.id)" class="text-danger" style="text-decoration:none; cursor: pointer;">remove</a>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row" *ngIf="cartList && cartList.length > 0">
+            <div class="col-md-7"></div>
+            <div class="col-md-5">
+                <p>Cart Total Amount:<strong>Rs. {{cartTotal}}</strong></p>
+                <p>Discount :<b> {{discount}}%</b></p>
+                <p>Grand Total : <b> Rs.{{grandTotal}}</b></p>
+            </div>
+        </div>
+        <div class="row" *ngIf="!cartList">
+          <div class="col-md-12">
+            Cart is empty <a href="/cart">Add product to cart</a>
+          </div>
+        </div>
+
+    </div>
+    </div>    
+  </div>
+</div>
